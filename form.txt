@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Webcam Recording</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg/dist/ffmpeg.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
+<style>
+canvas#overlay {
+    position: fixed;
+}
+.hide_on_click
+ {
+     display:none;
+ }
+ 
+ 
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background: #00000099;
+}
+#loader {
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #0a587b ;
+    -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+ 
+#loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #e74c3c;
+    -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+      animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+ 
+#loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #f9c922;
+    -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+      animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+ 
+@-webkit-keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);  /* IE 9 */
+        transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+    100% {
+        -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);  /* IE 9 */
+        transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+}
+@keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);  /* IE 9 */
+        transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+    100% {
+        -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);  /* IE 9 */
+        transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+}
+#hide_on_click
+{
+    display:none;
+}
+body
+{
+        font-family: math;
+    color: white;
+    background: linear-gradient(-90deg, #0a587b 0.00%, #b53855 100.00%);
+}
+.camera_btn
+{
+padding: 10px 20px;
+    /*background-color: white;*/
+    background: linear-gradient(90deg, rgba(51, 92, 155, 1) 0%, rgba(51, 92, 155, 1) 56%, rgba(118, 118, 196, 1) 100%);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    border: none;
+    font-weight: bolder;
+	
+	}
+    #videoElement {
+    /*  transform: scaleX(-1);  Flip the video horizontally */
+      
+        -webkit-transform: scaleX(-1); /* Flip the video horizontally on Safari */
+  transform: scaleX(-1); /* Flip the video horizontally on other browsers */
+  -webkit-backface-visibility: hidden; /* Improve rendering performance */
+  backface-visibility: hidden; /* Improve rendering performance */
+    }
+	
+	
+.main_div
+{
+background: rgb(81,48,114);
+background: linear-gradient(90deg, rgba(81,48,114,1) 0%, rgba(13,78,98,1) 56%, rgba(184,196,209,1) 100%);
+}
+body{
+	color:white;
+}
+.bg_img
+{
+	 background-image: url("https://ek-reps.com/nyra/images/5513843_286262.png");
+	 background-size: contain;
+}
+.cstm_pad
+{
+	padding-left: 12px;
+}
+.form-control
+{
+background: #B7CEDD;
+    border-color: #707070;
+    margin-top: 10px;
+}
+.btns
+{
+font-size: 14px;
+margin-bottom:8px;
+border-color:#00d5ff00;;
+color:white;
+background: rgb(114,0,0);
+background: linear-gradient(90deg, rgba(114,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,1) 100%);
+}
+.btn_upload
+{
+font-size: 14px;
+margin-bottom:8px;
+border-color:#00d5ff00;;
+color:white;
+background: rgb(118,118,196);
+background: linear-gradient(90deg, rgba(51,92,155,1) 0%, rgba(51,92,155,1) 56%, rgba(118,118,196,1) 100%);
+}
+.line
+{
+height: 4px !important;
+}
+@font-face {
+  font-family: neuebold;
+  src: url(/video/images/HelveticaNeueBold.otf);
+}
+@font-face {
+  font-family: neuethinbold;
+  src: url(/video/images/HelveticaNeueMedium.otf);
+}
+@font-face {
+  font-family: neuethin;
+  src: url(/video/images/HelveticaNeueRoman.otf);
+}
+@font-face {
+  font-family: neuethinlight;
+  src: url(/video/images/HelveticaNeueLight.otf);
+}
+@font-face {
+  font-family: neueitelic;
+  src: url(/video/images/HelveticaNeueLightItalic.otf);
+}
+
+.form-control:focus
+{
+color:#c5bcbc !important;
+}	
+
+@media only screen and (max-width: 600px) {
+
+  .remove_bg
+  {
+      background: #e9e9e900 !important;
+      border: none !important;
+  }
+  .bg_img
+  {
+   padding-top: 0px !important;
+  }
+  .small_screen_css
+  {
+      text-align: center;
+  }
+  .change_size
+  {
+    float: none !important;
+    width: 45% !important; 
+  }
+  .footer_cls
+  {
+   margin-top: 100% !important;
+  }
+}
+        .filler-word {
+            background-color: red;
+            color: black;
+            font-weight: bold;
+        }
+        .weak-word {
+            background-color: yellow;
+            color: black;
+            font-weight: bold;
+        }
+
+    .repeating-word {
+        background-color: orange;
+        color: black;
+        font-weight: bold;
+    }
+        
+#result_screen
+{
+   display:none; 
+}
+
+.sml_size
+{
+    font-size: 14px;
+    margin-bottom: 0px;
+    font-family: neuebold;
+}
+.try_btn
+{
+   font-size: 12px;
+    background: linear-gradient(90deg, rgba(43, 181, 232, 1) 0%, rgba(0, 141, 141, 1) 100%);
+    color: white;
+    border-color: #00fff087; 
+    font-family: neuebold;
+}
+.colored {
+  /*accent-color: red;*/
+  width: 100%;
+}
+progress {
+  height: 35px;
+}
+/*.video_bg_img*/
+/*{*/
+/* background-image: url("/video/images/giphy.webp");*/
+/*}*/
+</style>
+</head>
+<body class="main_div">
+
+<!--<div class="container-fluid">-->
+<!--<div class="row">-->
+<!--<div class="col-md-3"></div>-->
+<!--<div align="center" class="col-md-6">-->
+<!--       <video id="videoElement" autoplay muted></video>-->
+<!--</div>-->
+<!-- <div align="center" class="col-md-6 col-12" >-->
+<!--      <div class="embed-responsive embed-responsive-16by9">-->
+<!--        <video id="videoElement" class="embed-responsive-item" autoplay muted style="width:100%"></video>-->
+<!--      </div>-->
+<!-- </div>-->
+<!--<div class="col-md-3"></div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div align="center">-->
+ 
+<!--  <button class="camera_btn" id="startRecording">Start Recording</button>-->
+<!--  <button class="camera_btn" id="stopRecording" style="display:none;">Stop Recording</button>-->
+<!--</div>-->
+<!--<form id="uploadForm" action="https://ek-reps.com/python/analyze" method="post" enctype="multipart/form-data">-->
+<!--  <input type="file" id="videoFileInput" name="videoFile" accept="video/*" class="file" style="display:none;" >-->
+<!--  <button id="uploadButton" style="display:none;">Upload Video</button>-->
+<!--</form>-->
+<!--	<div class="row">-->
+<!--	    <div class="col-md-12 ">-->
+<!--<div id="loader-wrapper" class="hide_on_click">-->
+<!--    <div id="loader" class="hide_on_click"></div>-->
+<!--</div>-->
+<!--          </div>-->
+<!--    </div>-->
+
+
+<!--<button type="button" id="testing">merge</button>-->
+
+<!--<button id="liveRecordBtn">Start Live Recording</button>-->
+
+<div style="background: #2B2B53;margin-bottom: 25px;height: 13px;"> </div>      
+<div class="container" id="main_screen">
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom: 12px;">
+            <div style="float:left; padding-top: 10px;">
+                <h5 style="font-family: neuebold;">Welcome!</h5>
+            </div>		
+            <div style="float:right;">
+                <a href="https://ek-reps.com/nyra/">
+                    <img class="img-fluid" src="/video/images/Image_log_out.png" style="margin-left: 10px;">
+                </a>
+            </div>		
+        </div>
+    </div>
+    <div style="border: 1px solid;">
+        <div class="row" style="background: #e9e9e966; margin: 6px;">
+            <div class="col-md-12 bg_img" style="text-align:center; padding-top: 24px;">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6" style="position: relative; top: 42px;">	
+                        <div class="embed-responsive embed-responsive-16by9" style="height: 50vh;">
+                            <video id="videoElement" onloadedmetadata="onPlay(this)" class="embed-responsive-item" autoplay muted playsinline style="height:100%; width:100%; background: black; border: 5px solid white;"></video>
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>	
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 remove_bg" style="background: #e9e9e966; margin: 6px; border: 6px solid white; border-radius: 26px;">
+                        <div class="row" style="padding-top: 45px;padding-bottom: 40px; align-items: baseline;">
+                            <div class="col-md-12">
+                                <button class="camera_btn" id="startRecording" style="font-family: sans-serif;">Start Recording</button>
+                                <button class="camera_btn" id="stopRecording" style="display:none; font-family: sans-serif;">Stop Recording</button>
+                                <form id="uploadForm" action="https://ek-reps.com/python/analyze" method="post" enctype="multipart/form-data">
+                                    <input type="file" id="videoFileInput" name="videoFile" accept="video/*" class="file" style="display:none;">
+                                    <button id="uploadButton" style="display:none;">Upload Video</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>	
+</div> 
+
+                        
+<!-- Result code -->
+
+<div class="container" id="result_screen">
+     <input id="inputId" hidden >
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom: 12px;">
+		<div style="float:left; padding-top: 10px;">
+            <h5 style="font-family: neuebold;">Welcome!</h5>
+		</div>		
+		<div style="float:right;">
+            <!--<span><img class="img-fluid" src="https://ek-reps.com/nyra/images/Image_setting.png" style="margin-left: 10px;"></span>--><a href="https://ek-reps.com/nyra/"><img class="img-fluid" src="/video/images/Image_log_out.png" style="margin-left: 10px;"></a>
+		</div>		
+
+        </div>
+    </div>
+<div style="border: 1px solid;">
+    <div class="row" style="background: #e9e9e966; margin: 6px;">
+		<div class="col-md-12 bg_img" style="text-align:center;     padding-top: 24px;">
+			<!--<div class="row" style="align-items: center;">-->
+			<div class="row" >
+			    <div class="col-md-1"></div>
+				 <div class="col-md-4" style="padding-left: 12px; padding-right: 12px; margin-top: 6px; margin-bottom: 6px;">
+				     <img class="img-fluid loading_image" src="/video/images/giphy.webp" style="margin-left: 10px; height:100%;border: 4px solid white;">
+				     	<video controls class="img-fluid video_bg_img" style="height:100%; border: 4px solid white; display:none" id="myVideo" playsinline>
+                          <source src="" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>
+                              <audio id="audioPlayback_value" controls style="display:none;"></audio>
+				</div>
+				 <div class="col-md-6 change_setting" style="background: #e9e9e966; margin: 6px;     display: grid;    border: 4px solid white;">
+				    <div class="row" style="align-items: center; padding-top: 26px;  padding-bottom: 25px;">
+				        <div class="col-md-8" style="border-right: 1px dotted white; text-align: left;">
+				           	<h3 class="sml_size" id="week_words">Weak Words: %</h3>
+                        	<progress class="colored weak_word_color" id="weak_words_progress_bar" value="" max="100" ></progress>
+                            <h3 class="sml_size" style="margin-bottom: 0px;" id="filler_words">Filler Words: </h3>
+                        	<progress class="colored filler_word_color" id="filler_words_progress_bar" value="" max="100"></progress>
+                            <h3 class="sml_size" id="concisePercentage">Conciseness Score: %</h3>
+                        	<progress class="colored conciseness_word_color" id="concisePercentage_progress_bar" value="" max="100"></progress>
+                            <h3 class="sml_size" id="smilescore">Smiling Percentage: %</h3>
+                        	<progress class="colored smiling_word_color" id="smilescore_progress_bar" value="" max="100" ></progress>
+                        	<h3 id="words_per_minute">Speed:  WPM</h3>
+				        </div>
+				            <div class="col-md-4" style="text-align: center;">
+				            <a href="https://ek-reps.com/python" style="text-decoration: none;"><button class="form-control try_btn" style="font-size: 12px; font-family: neuethinbold;">Let’s Try Again!</button></a>
+				        </div>
+				    </div> 
+				 </div>
+			</div>	
+		    <div class="row remove_css" style="padding-left: 6px;">
+		        <div class="col-md-1"></div>
+				        <div class="col-md-10 change_result_css" style="text-align: left; margin-top: 10px; background: #C12054; padding-top: 12px; padding-bottom: 12px; padding-left: 12px; margin-left: 5px;">
+				         <div class="row">
+				          <div class="col-md-10 col-8"> 
+				            <h4 style="font-family: neuebold;">What You Spoke:</h4>
+				          </div>    
+				          <div class="col-md-2 col-4" style="text-align: center;"> 
+				        <!--<button class="try_btn" id="speak" style="font-size: 12px; font-family: neuethinbold; border-radius: 4px;">Read Text</button>-->
+				          </div>    
+				          </div>    
+				         <div class="row">
+				          <div class="col-md-12"> 
+				         <p style="font-family: neuethinlight;" id="spokenText"></p>
+				          </div>    
+				          </div>    
+				            
+				        </div>
+				<div class="col-md-1"></div>        
+			</div> 
+		    <div class="row remove_css" style="padding-left: 6px;">
+		        <div class="col-md-1"></div>
+				        <div class="col-md-10 change_result_css" style="text-align: left; margin-top: 10px; background: #2059c1; padding-top: 12px; padding-bottom: 12px; padding-left: 12px; margin-left: 5px;">
+				         <div class="row">
+				          <div class="col-md-10 col-8"> 
+				            <h4 style="font-family: neuebold;">Grammar Correction:</h4>
+				          </div>    
+				          <div class="col-md-2 col-4" style="text-align: center;"> 
+				        <button class="try_btn" id="speak_correctedcontent" style="font-size: 12px; font-family: neuethinbold; border-radius: 4px;">Hear the Pronunciation</button>
+				          </div>    
+				          </div>    
+				         <div class="row">
+				          <div class="col-md-12"> 
+				         <p style="font-family: neuethinlight;" id="correctedContent"></p>
+				          </div>    
+				          </div>    
+				            
+				        </div>
+				<div class="col-md-1"></div>        
+			</div>
+				    <div class="row remove_css" style="padding-left: 6px;">
+				    <div class="col-md-1"></div>    
+				        <div class="col-md-10 change_result_css" style="text-align: left; margin-top: 10px; background: #6187C1; padding-top: 12px; padding-bottom: 12px; padding-left: 12px; margin-left: 5px;">
+				            <h4 style="color:#FACF5B; font-family: neuebold;" >Suggested Concise Version:</h4>
+				            <p style="font-family: neuethinlight;" id="concisedContent"></p>
+				     <div class="col-md-1"></div> 
+				        </div>
+				    </div> 
+				    <div class="row remove_css" style="padding-left: 6px;">
+				    <div class="col-md-1"></div>    
+				        <div class="col-md-10 change_result_css" style="text-align: left; margin-top: 10px; background: #6187C1; padding-top: 12px; padding-bottom: 12px; padding-left: 12px; margin-left: 5px;">
+				            <h4 style="color:#FACF5B; font-family: neuebold;" >Summerize:</h4>
+				            <p style="font-family: neuethinlight;" id="summerize">
+                                <div class="d-flex justify-content-center" >
+                                    <div class="spinner-border" role="status" id="summloader">
+                                    </div>
+                                  </div>
+                            </p>
+				     <div class="col-md-1"></div> 
+				        </div>
+				    </div> 
+			</div>
+		<div class="row" style="margin-bottom: 22px; margin-top: 22px;">
+		<!-- <div class="col-md-12"><img class="img-fluid" src="https://ek-reps.com/nyra/images/logo-new.png" style="width: 20%;float: right;"></div> -->
+		<div class="col-md-12 small_screen_css"><img class="img-fluid change_size" src="/video/images/logo-new.png" style="width: 10%;float: right;"></div>
+		</div>	
+		</div>
+    </div>
+</div>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="background: #2B2B53; margin-top: 13.5%;" class="footer_cls">
+<div class="container" >
+    <div class="row">
+        <div class="col-md-12" >
+		<div>
+            <span style="font-size: 12px; font-family: sans-serif;">About NYRA |  KB Articles |  Success Stories |  Terms & Conditions | Support |  Disclaimer |  Privacy Policy |  Blog | Contact for B2B </span>
+		</div>
+        </div>
+    </div>
+ </div>
+</div>
+
+	<div class="row">
+	    <div class="col-md-12 ">
+<div id="loader-wrapper" class="hide_on_click">
+    <div id="loader" class="hide_on_click"></div>
+</div>
+          </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Materialize CSS -->
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+
+<!-- Materialize JS -->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/public/js/face-api.js"></script>
+
+<script src="/public/js/faceDetectionControls.js"></script>
+
+    
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+
+        var recognition;
+        var isRecording = false;
+        var finalTranscript = '';  // Variable to store the final transcript
+        var fillerWordCount = 0;
+        var weakWordCount = 0;
+        var totalWords = 0;
+        var per_weakword = 0;
+        var concisePercentage = 0;
+        var per_fillerwords = 0;
+        var smilePercentage = 0;
+        var wordsPerMinute = 0;
+        var startTime = "";
+        var endTime = "";
+        
+        var shivweak = 0;
+        var shivfil = 0
+        var shivcocise = 0;
+        var shivtotal = 0;
+   
+   
+   
+   
+        // List of filler and weak words
+        var fillerWords = ["um", "uh", "like", "you know", "so", "actually", "basically", "literally", "just", "I mean", "kind of"];
+        var weakWords = ["maybe", "perhaps", "probably", "possibly", "might", "could", "should", "would"];
+        
+
+
+
+
+let isDetectionRunning = false;
+let happyTime = 0; // Total time user is smiling
+let totalDetectionTime = 0; // Total time detection is running
+let detectionStartTime = null; // Start time for detection
+let happyStartTime = null; // Time when the user starts smiling
+
+let mediaRecorder;
+let stream;
+const videoElement = document.getElementById('videoElement');
+const startRecordingBtn = document.getElementById('startRecording');
+const stopRecordingBtn = document.getElementById('stopRecording');
+const videoFileInput = document.getElementById('videoFileInput');
+const uploadForm = document.getElementById('uploadForm');
+const uploadButton = document.getElementById('uploadButton');
+
+startRecordingBtn.addEventListener('click', startt);
+stopRecordingBtn.addEventListener('click', stopRecording);
+
+async function startt() {
+        startRecordingBtn.disabled = true;
+    startRecordingBtn.textContent = 'Starting...';
+    await initFaceDetectionControls();  // Wait for this to finish
+    await run();  // Wait for this to finish
+    startRecording();  // Start recording after both are done
+}
+
+// Start recording
+async function startRecording() {
+
+      
+    detectionStartTime = Date.now();
+    console.log('Recording started');
+
+    // Start media recording
+    stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    videoElement.srcObject = stream;
+    mediaRecorder = new MediaRecorder(stream);
+    const chunks = [];
+
+    mediaRecorder.ondataavailable = function (e) {
+        chunks.push(e.data);
+    };
+
+    mediaRecorder.onstop = async function () {
+        $(".img-fluid.loading_image").show();
+        $("#myVideo").hide();
+
+        const blob = new Blob(chunks, { type: 'video/mp4' });
+        const videoURL = URL.createObjectURL(blob);
+        $('#myVideo').attr('src', videoURL).get(0).load();
+
+        $(".img-fluid.loading_image").hide();
+        $("#myVideo").show();
+
+        const formData = new FormData();
+        const timestamp = Date.now();
+        const filename = `recorded-video-${timestamp}.mp4`;
+
+        formData.append('videoFile', blob, filename);
+
+        fetch('/upload', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error('Failed to upload video');
+                }
+            })
+            .then(text => {
+                console.log('Video uploaded successfully!');
+                console.log('Server response:', text);
+                
+                
+        var shivwords = text.split(/\b/); // Split by word boundary
+        shivtotal = shivwords.length/2
+
+        for (var i = 0; i < shivwords.length; i++) {
+            var shivcleanWord = shivwords[i].toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+            if (shivcleanWord.trim() === '') {
+                continue;
+            }
+
+            if (fillerWords.includes(shivcleanWord)) {
+                shivfil++;
+            } else if (weakWords.includes(shivcleanWord)) {
+                shivweak++;
+            }
+        }
+                
+                var highlightedText = highlightWords(text);
+                document.getElementById('spokenText').innerHTML = highlightedText;
+ 
+
+                var analysisData = analyzeTranscript(text, detectionStartTime, Date.now());
+               $('#inputId').val(highlightedText).trigger('change');
+                $('#words_per_minute').text('Speed: ' + Math.round(analysisData.wordsPerMinute) + ' WPM');
+                $("#loader-wrapper").addClass("hide_on_click");
+                $("#loader").addClass("hide_on_click");
+            })
+            .catch(error => {
+                console.error('Error uploading video:', error);
+            });
+    };
+
+    mediaRecorder.start();
+    document.getElementById('startRecording').style.display = 'none';
+    document.getElementById('stopRecording').style.display = 'inline';
+
+    // Start smile detection
+    startDetection();
+}
+
+// Stop recording
+function stopRecording() {
+     $("#loader-wrapper").removeClass("hide_on_click");
+        $("#loader").removeClass("hide_on_click");
+        document.getElementById('loader').style.display = 'block';
+    
+    mediaRecorder.stop();
+    stream.getTracks().forEach(track => track.stop());
+    console.log('Recording stopped');
+
+    // Stop smile detection
+    stopDetection();
+}
+
+// Smile detection functions
+async function onPlay() {
+    if (!isDetectionRunning) return;
+
+    const videoEl = $('#videoElement').get(0);
+
+    if (videoEl.paused || videoEl.ended || !isFaceDetectionModelLoaded()) {
+        return setTimeout(() => onPlay(), 100);
+    }
+
+    const options = getFaceDetectorOptions();
+    const ts = Date.now();
+    
+
+    // Detect face and expressions
+    const result = await faceapi.detectSingleFace(videoEl, options).withFaceExpressions();
+
+    if (result) {
+        
+        // const canvas = $('#overlay').get(0);
+        // const dims = faceapi.matchDimensions(canvas, videoEl, true);
+        // const resizedResult = faceapi.resizeResults(result, dims);
+        // faceapi.draw.drawDetections(canvas, resizedResult);
+        // faceapi.draw.drawFaceExpressions(canvas, resizedResult, 0.05);
+    
+
+        // Check happiness (smile detection)
+        const happiness = result.expressions.happy;
+        console.log(`Happiness: ${Math.round(happiness * 100)}%`);
+
+        if (happiness > 0.5) { // Adjust this threshold if needed
+            if (!happyStartTime) {
+                happyStartTime = Date.now();
+                console.log("User started smiling...");
+            }
+        } else if (happyStartTime) {
+            happyTime += (Date.now() - happyStartTime) / 1000;
+            happyStartTime = null;
+            console.log("User stopped smiling.");
+        }
+    }
+
+    // Update total detection time
+    totalDetectionTime = (Date.now() - detectionStartTime) / 1000;
+
+    setTimeout(() => onPlay(), 100);
+}
+
+// Start face detection
+async function run() {
+    console.log("Loading models...");
+    await changeFaceDetector(TINY_FACE_DETECTOR);
+    await faceapi.loadFaceExpressionModel('/'); // Ensure this path points to your face expression model
+    console.log("Models loaded.");
+    changeInputSize(224);
+
+    // const stream = await navigator.mediaDevices.getUserMedia({ video: {} });
+    const videoEl = $('#videoElement').get(0);
+    videoEl.srcObject = stream;
+}
+
+// Start detection process
+function startDetection() {
+    if (isDetectionRunning) return;
+    isDetectionRunning = true;
+
+    detectionStartTime = Date.now();
+    happyTime = 0;
+    totalDetectionTime = 0;
+
+    console.log("Detection started...");
+    onPlay();
+}
+
+// Stop detection process
+function stopDetection() {
+    if (!isDetectionRunning) return;
+    isDetectionRunning = false;
+
+    // Calculate final smile duration
+    if (happyStartTime) {
+        happyTime += (Date.now() - happyStartTime) / 1000;
+        happyStartTime = null;
+    }
+
+    // Calculate smile percentage
+    smilePercentage = totalDetectionTime > 0 ? (happyTime / totalDetectionTime) * 100 : 0;
+
+    console.log(`Detection stopped.`);
+    console.log(`Total detection time: ${totalDetectionTime.toFixed(2)} seconds`);
+    console.log(`Total happy time: ${happyTime.toFixed(2)} seconds`);
+    console.log(`Smiling percentage: ${smilePercentage.toFixed(2)}%`);
+    $('#smilescore').text(`Smiling percentage:  ${Math.round(smilePercentage.toFixed(2))}% ( ${happyTime.toFixed(2)} seconds )`);
+    $('#smilescore_progress_bar').val(Math.round(smilePercentage.toFixed(2)));
+
+    // Clear overlay
+    // const canvas = $('#overlay').get(0);
+    // const context = canvas.getContext('2d');
+    // context.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+
+
+
+
+  
+    
+   function highlightWords(text) {
+        var words = text.split(/\b/); // Split by word boundary
+        var previousWord = "";
+        var repeatingWordCount = 0;
+        var isPreviousRepeating = false;
+
+        for (var i = 0; i < words.length; i++) {
+            var cleanWord = words[i].toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+            if (cleanWord.trim() === '') {
+                continue;
+            }
+
+            if (fillerWords.includes(cleanWord)) {
+                words[i] = '<span class="filler-word">' + words[i] + '</span>';
+                fillerWordCount++;
+            } else if (weakWords.includes(cleanWord)) {
+                words[i] = '<span class="weak-word">' + words[i] + '</span>';
+                weakWordCount++;
+            }
+            
+
+            // Check if the current word is the same as the previous word
+            if (cleanWord === previousWord && !isPreviousRepeating) {
+                words[i-1] = '<span class="repeating-word">' + words[i-1].replace(/<\/?span[^>]*>/g, "") + '</span>';
+                words[i] = '<span class="repeating-word">' + words[i] + '</span>';
+                repeatingWordCount++; // Increment the count once per occurrence of consecutive repeats
+                isPreviousRepeating = true;
+            } else {
+                isPreviousRepeating = false;
+            }
+
+            previousWord = cleanWord;
+        }
+        
+        // Get the text content of the paragraph
+let paragraphText = document.getElementById("spokenText").innerText;
+
+// Remove unwanted characters and normalize spaces
+let cleanedText = paragraphText.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, ' ').trim();
+
+// Split the cleaned text into words
+let wordsArray = cleanedText.split(' ');
+
+// Count the number of words
+let wordCount = wordsArray.length;
+
+console.log(`The paragraph contains ${wordCount} words.`);
+
+weakkwordcount = document.querySelectorAll('.weak-word').length;
+fillerwordscount = document.querySelectorAll('.filler-word').length;
+        
+      per_weakword = (weakkwordcount / wordCount) * 100;
+      per_fillerwords = (fillerwordscount/ wordCount) * 100;
+      fillerwordpercentage = (document.querySelectorAll('.filler-word').length / wordCount) * 100;
+    //   total_fillerwords=document.querySelectorAll('.filler-word').length
+    //   per_fillerwords = (total_fillerwords / totalWords) * 100;
+console.log("weakword"+per_weakword);
+console.log("wordslength"+words.length);
+    $('#week_words').text('Weak Word : ' + Math.round(per_weakword.toFixed(2)) + '%' + ' ( ' + shivweak + ' Words )');
+    // $('#filler_words').text('Filler Word Count: ' + Math.round(fillerWordCount));
+    $('#filler_words').text('Filler Word : ' + Math.round(per_fillerwords.toFixed(2)) + '%' + ' ( ' + shivfil + ' Words )');
+
+    $('#weak_words_progress_bar').val(Math.round(per_weakword.toFixed(2)));
+    $('#filler_words_progress_bar').val(Math.round(per_fillerwords.toFixed(2)));
+
+
+
+        return words.join('');
+    }
+        
+        function analyzeTranscript(text, startTime, endTime) {
+        var words = text.trim().split(/\s+/);
+        totalWords = words.length;
+
+        var timeDiffInMinutes = (endTime - startTime) / (1000 * 60);
+console.log("startTime"+startTime); 
+console.log("endTime"+endTime); 
+console.log("timeDiffInMinutes"+timeDiffInMinutes); 
+        // Calculate words per minute
+         wordsPerMinute = totalWords / timeDiffInMinutes;
+console.log("wordsPerMinute"+wordsPerMinute); 
+        return {
+            wordsPerMinute: wordsPerMinute
+        };
+    }    
+  
+  $(document).ready(function(){
+      $('#speak').click(function() {
+        var text = $('#spokenText').text(); // Get the text from the div
+        var utterance = new SpeechSynthesisUtterance(text); // Create a speech utterance
+        speechSynthesis.speak(utterance); // Speak the utterance
+    });  
+      
+      $('#speak_correctedcontent').click(function() {
+        var text = $('#correctedContent').text(); // Get the text from the div
+        var utterance = new SpeechSynthesisUtterance(text); // Create a speech utterance
+        speechSynthesis.speak(utterance); // Speak the utterance
+    });  
+      
+           $('#inputId').on('change', function(){
+                 var originalContent = $('#spokenText').text();
+            // alert(originalContent);
+        //     $.ajax({
+        //         url: 'https://ek-reps.com:8080/api/conciseness', // Endpoint where your server-side code is located
+        //         type: 'POST',
+        //         data: JSON.stringify({ content: originalContent }), // Stringify the data
+        //         contentType: 'application/json', // Set the content type to JSON
+        //         success: function(response) {
+        //             var concised_words = $('#concisedContent').text(response.concised);
+        //             highlightWords(response.concised);
+        //           var original_words= $('#spokenText').text();
+        //             // alert(original_words.length);
+        //             // alert(concised_words.length);
+        //             concisePercentage = ((original_words.length - response.concised.length) / original_words.length) * 100;
+        //             $('#concisePercentage').text("Conciseness Score: " + Math.round(concisePercentage)+"%");
+        //             $('#concisePercentage_progress_bar').val(Math.round(concisePercentage));
+        //             alert(concisePercentage);
+                    
+        // document.getElementById('main_screen').style.display = 'none'; // To hide
+        // document.getElementById('result_screen').style.display = 'block'; // To show
+        //  $("#loader-wrapper").addClass("hide_on_click");
+        // $("#loader").addClass("hide_on_click");
+                    
+        //         },
+        //         error: function() {
+        //             alert('Error processing request');
+        //         }
+        //     });
+        
+        
+        
+        
+        
+        
+        
+        // First AJAX call
+$.ajax({
+    url: 'https://ek-reps.com:8080/api/conciseness', // Endpoint where your server-side code is located
+    type: 'POST',
+    data: JSON.stringify({ content: originalContent }), // Stringify the data
+    contentType: 'application/json', // Set the content type to JSON
+    success: function(response) {
+        // Process the response
+        var concisedWords = response.concised;
+        $('#concisedContent').text(concisedWords);
+        highlightWords(concisedWords);
+
+        var originalWords = $('#spokenText').text();
+
+        // Calculate conciseness percentage
+        var concisePercentage = ((originalWords.length - concisedWords.length) / originalWords.length) * 100;
+        concisePercentage = Math.round(concisePercentage); // Round the value for display
+
+        // Update the UI
+        $('#concisePercentage').text("Conciseness Score: " + concisePercentage + "%");
+        $('#concisePercentage_progress_bar').val(concisePercentage);
+
+        // Prepare summarize content
+        var summarizeContent = {
+            fillerWords: Math.round(((shivfil / shivtotal) * 100).toFixed(2)) + '%',
+            weakWords: Math.round(((shivweak / shivtotal) * 100).toFixed(2)) + '%',
+            conciseness: concisePercentage + '%',
+            smiling: Math.round(smilePercentage.toFixed(2)) + '%',
+            speakingSpeed: wordsPerMinute + ' words per minute'
+        };
+
+        // Second AJAX call
+        return $.ajax({
+            url: 'https://ek-reps.com:8080/api/summarizedata', // Endpoint where your server-side code is located
+            type: 'POST',
+            data: JSON.stringify({ content: summarizeContent }), // Stringify the data
+            contentType: 'application/json', // Set the content type to JSON
+            success: function(response) {
+                let updatedText = response.corrected.replace(/\n/g, "<br>");
+                $('#summerize').html(updatedText);
+                $('#summloader').removeClass('spinner-border');
+                highlightWords(updatedText);
+
+                document.getElementById('main_screen').style.display = 'none'; // To hide
+                document.getElementById('result_screen').style.display = 'block'; // To show
+                $("#loader-wrapper").addClass("hide_on_click");
+                $("#loader").addClass("hide_on_click");
+            },
+            error: function() {
+                alert('Error processing second request');
+            }
+        });
+    },
+    error: function() {
+        alert('Error processing first request');
+    }
+});
+
+        
+        
+        
+        
+        
+        
+            
+            $.ajax({
+                url: 'https://ek-reps.com:8080/api/grammarFix', // Endpoint where your server-side code is located
+                type: 'POST',
+                data: JSON.stringify({ content: originalContent }), // Stringify the data
+                contentType: 'application/json', // Set the content type to JSON
+                success: function(response) {
+                    var corrected_words = $('#correctedContent').text(response.corrected);
+                    highlightWords(response.corrected);
+
+        document.getElementById('main_screen').style.display = 'none'; // To hide
+        document.getElementById('result_screen').style.display = 'block'; // To show
+         $("#loader-wrapper").addClass("hide_on_click");
+        $("#loader").addClass("hide_on_click");
+                    
+                },
+                error: function() {
+                    alert('Error processing request');
+                }
+            });
+//     var summarizecontent =  {
+//     fillerWords: Math.round(((shivfil/ shivtotal) * 100).toFixed(2))+'%',
+//     weakWords: Math.round(((shivweak/ shivtotal) * 100).toFixed(2))+'%',
+//     conciseness: Math.round(concisePercentage)+'%',
+//     smiling: Math.round(smilePercentage.toFixed(2))+'%',
+//     speakingSpeed: wordsPerMinute+'words per minute'
+// };   
+// console.log(summarizecontent)  
+//             $.ajax({
+//                 url: 'https://ek-reps.com:8080/api/summarizedata', // Endpoint where your server-side code is located
+//                 type: 'POST',
+//                 data: JSON.stringify({ content: summarizecontent }), // Stringify the data
+//                 contentType: 'application/json', // Set the content type to JSON
+//                 success: function(response) {
+//                     let updatedText = response.corrected.replace(/\n/g, "<br>");
+//                     var corrected_words = $('#summerize').html(updatedText);
+//                     $('#summloader').removeClass('spinner-border');
+//                     highlightWords(updatedText);
+
+//         document.getElementById('main_screen').style.display = 'none'; // To hide
+//         document.getElementById('result_screen').style.display = 'block'; // To show
+//          $("#loader-wrapper").addClass("hide_on_click");
+//         $("#loader").addClass("hide_on_click");
+                    
+//                 },
+//                 error: function() {
+//                     alert('Error processing request');
+//                 }
+//             });
+
+
+            });
+    
+
+$('#testing').click(function() {
+                  alert("Hello");
+        originalContent="'Hello, my name is Homan, I am from Balakant, and I am working as a Python developer in Ekar Ekar.' 'Hello, my name is Homan. I'm from <inaudible>. Mm. Uh, and, uh, uh, I am working as a Python developer, uh, in, uh, e er, uh.'";          
+            $.ajax({
+                url: 'https://ek-reps.com:8080/api/mergeText', // Endpoint where your server-side code is located
+                type: 'POST',
+                data: JSON.stringify({ content: originalContent }), // Stringify the data
+                contentType: 'application/json', // Set the content type to JSON
+                success: function(response) {
+                   alert(response.mergedText);
+                   console.log(response.mergedText)
+                    
+                },
+                error: function() {
+                    alert('Error processing request');
+                }
+            });
+          
+        });    
+        
+      
+        
+  });
+</script>
+</body>
+</html>

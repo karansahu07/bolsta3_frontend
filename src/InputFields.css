@@ -1,0 +1,78 @@
+.input-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+ 
+  border-radius: 8px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: white;
+  font-weight: bold;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  padding-left: 17px;
+  border-radius: 30px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.input-wrapper input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: white;
+  padding: 10px;
+  outline: none;
+  width: 100%;
+}
+
+.input-wrapper .icon,
+.input-wrapper .icon-eye {
+  color: white;
+  margin-right: 10px;
+}
+
+.icon-eye {
+  cursor: pointer;
+}
+
+.gradient-button {
+  background: linear-gradient(90deg, rgb(58 220 255) 0%, rgba(92, 230, 172, 1) 100%);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.3s;
+  margin-top: 24px;
+
+}
+
+.gradient-button:hover {
+  background: linear-gradient(90deg, rgba(92, 230, 172, 1) 0%, rgb(58 220 255) 100%);
+}
+
+.submit_button,.sendotp_button
+{
+	    width: 100%;
+	background: transparent;
+    border: none;
+    padding: 0px;
+}	
+
+.img-resize {
+    max-width: 70%;
+    height: auto;
+}
