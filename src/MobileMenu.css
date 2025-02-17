@@ -57,6 +57,7 @@
     .outer-container {
       width: 15% !important;
     }
+    
   
     .hamburger-menu {
       display: none;
@@ -132,5 +133,9 @@
 
   .vidframesize{
     width: 70%;
+  }
+
+  .navbarbackground {
+    background: linear-gradient(180deg, rgba(36,52,69,1) 0%, rgba(73,134,127,1) 100%);
   }
   

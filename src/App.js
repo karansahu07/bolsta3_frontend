@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AnalyzeData from './AnalyzeData'; 
 import UserDetails from './UserDetails';
 import Video from './Video';
+import Traningscreen from './admin/Traningscreen';
 // function App() {
   // return (
 // <div calss="container">
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/analyze-data" element={<AnalyzeData />} />
 		<Route path="/user-details/:userId" element={<UserDetails />} />
 		<Route path="/practice" element={<Video />} />
+		<Route path="/traningscreen" element={<Traningscreen/>} />
 		
       </Routes>
     </BrowserRouter>
