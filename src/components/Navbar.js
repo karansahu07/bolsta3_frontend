@@ -55,13 +55,13 @@ export default function Navbar() {
                     </div>
                 </div>
             </div>
-            <div className='navbarbackground ps-5 py-5 d-flex flex-column justify-content-between' style={{minHeight: '70vh'}}>
+            <div className='navbarbackground ps-3 ps-md-5 py-5 d-flex flex-column justify-content-between' style={{minHeight: '70vh'}}>
                 <div className='gap-2 d-flex flex-column gap-4'>
                     <Link className='d-flex gap-3 align-items-center'>
                         <img src='/icons/bolstaicon.svg' alt='icon-volsta' />
                         <p className='normal-font m-0 fs-5'>DASHBOARD</p>
                     </Link>
-                    <Link className='d-flex gap-3 align-items-center'>
+                    <Link className='d-flex gap-3 align-items-center' to='/traningscreen'>
                         <img src='/icons/Trainings.svg' alt='icon-volsta' />
                         <p className='normal-font m-0 fs-5'>Trainings</p>
                     </Link>
@@ -69,7 +69,7 @@ export default function Navbar() {
                         <img src='/icons/Addaccount.svg' alt='icon-volsta' />
                         <p className='normal-font m-0 fs-5'>Add Account</p>
                     </Link>
-                    <Link className='d-flex gap-3 align-items-center'>
+                    <Link className='d-flex gap-3 align-items-center' to='/addperson'>
                         <img src='/icons/person.svg' alt='icon-volsta' />
                         <p className='normal-font m-0 fs-5'>Person</p>
                     </Link>

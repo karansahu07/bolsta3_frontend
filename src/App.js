@@ -5,6 +5,7 @@ import AnalyzeData from './AnalyzeData';
 import UserDetails from './UserDetails';
 import Video from './Video';
 import Traningscreen from './admin/Traningscreen';
+import Addperson from './admin/Addperson';
 // function App() {
   // return (
 // <div calss="container">
@@ -21,6 +22,7 @@ const App = () => {
 		<Route path="/user-details/:userId" element={<UserDetails />} />
 		<Route path="/practice" element={<Video />} />
 		<Route path="/traningscreen" element={<Traningscreen/>} />
+		<Route path="/addperson" element={<Addperson/>} />
 		
       </Routes>
     </BrowserRouter>

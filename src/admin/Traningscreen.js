@@ -38,7 +38,7 @@ export default function Traningscreen() {
                 ✕
               </button>
               <div>
-                <video src='/admin/videodemo.jpg' className='w-50 h-50'/>
+                <video src={videourl} className='w-50 h-50'/>
               </div>
         </div>
     )}
