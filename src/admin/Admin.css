@@ -34,3 +34,8 @@ a:hover {
     text-decoration: none;
     color: white;
 }
+.dashboarddiv {
+  width:83%;
+  padding-top: 2rem;
+  padding-left: 2rem;
+}

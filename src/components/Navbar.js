@@ -57,7 +57,7 @@ export default function Navbar() {
             </div>
             <div className='navbarbackground ps-3 ps-md-5 py-5 d-flex flex-column justify-content-between' style={{minHeight: '70vh'}}>
                 <div className='gap-2 d-flex flex-column gap-4'>
-                    <Link className='d-flex gap-3 align-items-center'>
+                    <Link className='d-flex gap-3 align-items-center' to='/dashboard'>
                         <img src='/icons/bolstaicon.svg' alt='icon-volsta' />
                         <p className='normal-font m-0 fs-5'>DASHBOARD</p>
                     </Link>
@@ -85,10 +85,12 @@ export default function Navbar() {
                     </Link>
                 </div>
                 <div>
+                  <Link to='/'>
                 <button className='d-flex gap-3 align-items-center px-4 py-1 border-0'>
                         <img src='/icons/logout.svg' alt='icon-volsta' />
                         <p className='m-0 fs-6'>LOGOUT</p>
                     </button>
+                    </Link>
                 </div>
 
             </div>

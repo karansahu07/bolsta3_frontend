@@ -6,6 +6,7 @@ import UserDetails from './UserDetails';
 import Video from './Video';
 import Traningscreen from './admin/Traningscreen';
 import Addperson from './admin/Addperson';
+import Dashboard from './admin/Dashboard';
 // function App() {
   // return (
 // <div calss="container">
@@ -23,6 +24,7 @@ const App = () => {
 		<Route path="/practice" element={<Video />} />
 		<Route path="/traningscreen" element={<Traningscreen/>} />
 		<Route path="/addperson" element={<Addperson/>} />
+		<Route path="/dashboard" element={<Dashboard/>} />
 		
       </Routes>
     </BrowserRouter>
