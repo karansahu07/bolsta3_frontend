@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import PersonList from './PersonList'
 import './Admin.css'
 
 export default function Dashboard() {
@@ -179,8 +180,8 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </div>
-                    <div className='py-4 px-4 rounded-4' style={{border: '1px solid #A6A6A6', boxShadow: 'rgba(0, 0, 0, 0.5) -4px 8px 11px -4px'}}>
-
+                    <div className='custom-container py-4 px-4 rounded-4' style={{border: '1px solid #A6A6A6', boxShadow: 'rgba(0, 0, 0, 0.5) -4px 8px 11px -4px'}}>
+                    <PersonList />
                     </div>
                 </div>
             /</div>
