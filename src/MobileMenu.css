@@ -53,10 +53,15 @@
   }
   
   /* Outer Container Responsiveness */
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .outer-container {
       width: 15% !important;
     }
+    .analyzedatadiv {
+      width: 85% !important;
+      padding-top: 2rem;
+      padding-left: 2rem;
+  }
     
   
     .hamburger-menu {
@@ -123,7 +128,7 @@
     color:#fff !important
   }
   td{
-    color:#fff !important
+    color:#fff 
   }
   .analyzedatadiv{
     width:85%;
@@ -138,4 +143,14 @@
   .navbarbackground {
     background: linear-gradient(180deg, rgba(36,52,69,1) 0%, rgba(73,134,127,1) 100%);
   }
+
+  .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #243445 !important;
+    border-color: none;
+}
+a.page-link {
+  color: #243445 !important;
+}
   

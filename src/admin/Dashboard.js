@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import PersonList from './PersonList'
+import PersonList from './components/PersonList'
 import './Admin.css'
 
 export default function Dashboard() {

@@ -12,7 +12,7 @@ export default function Addperson() {
     
         <Navbar />
         <div className="container analyzedatadiv" >
-            <div className='px-md-3 pt-md-3 pt-5 d-flex flex-column flex-md-row justify-content-between'>
+            <div className='px-md-3 pt-md-5 pt-5 d-flex flex-column flex-md-row justify-content-between'>
                 <h2 className='fw-bold' style={{color: '#243445'}}>Add Person</h2>
                 <div className='d-flex flex-column flex-md-row  gap-2'>
                     <button className='d-flex py-2 px-2 gap-2 rounded border-0' style={{backgroundColor: '#243445'}}>

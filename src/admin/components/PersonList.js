@@ -48,7 +48,7 @@ const PersonList = () => {
               <div className="d-flex align-items-center gap-3">
                 <img src={person.image} alt={person.name} className="rounded-circle" width="40" height="40" />
                 <div>
-                  <h5 className="mb-0" style={{ color: "#243445" }}>{person.name}</h5>
+                  <h6 className="mb-0" style={{ color: "#243445" }}>{person.name}</h6>
                   <p className="small text-muted">{person.company}</p>
                 </div>
               </div>

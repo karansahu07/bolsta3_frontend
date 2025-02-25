@@ -7,6 +7,7 @@ import Video from './Video';
 import Traningscreen from './admin/Traningscreen';
 import Addperson from './admin/Addperson';
 import Dashboard from './admin/Dashboard';
+import PersonDetail from './admin/PersonDetail';
 // function App() {
   // return (
 // <div calss="container">
@@ -18,7 +19,7 @@ const App = () => {
     <div>
 	   <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />} exact />
+        <Route path="/" element={<PersonDetail />} exact />
         <Route path="/analyze-data" element={<AnalyzeData />} />
 		<Route path="/user-details/:userId" element={<UserDetails />} />
 		<Route path="/practice" element={<Video />} />
