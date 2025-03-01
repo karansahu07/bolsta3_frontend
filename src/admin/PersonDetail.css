@@ -1,0 +1,52 @@
+.icon-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .action-icon {
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .edit-icon {
+    color: #243445;
+  }
+  
+  .delete-icon {
+    color: #243445;
+  }
+  
+  .view-icon {
+    color: #243445; /* Dark background color */
+  }
+  
+  /* Popup Styling */
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+  }
+  
+  .close-btn {
+    background: #243445;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
