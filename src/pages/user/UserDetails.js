@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import './MobileMenu.css';
+import '../../MobileMenu.css';
 
-import './index.css';
+import '../../index.css';
 
 function UserDetails() {
     const { userId } = useParams();

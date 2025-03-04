@@ -1,16 +1,13 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
-import './Admin.css'
-import Addpersonform from './components/Addpersonform'
+import '../Admin.css'
+import Addpersonform from '../../../components/Addpersonform'
 
 export default function Addperson() {
   return (
     <>
     <div className="container-fluid" style={{ paddingLeft: "0px", paddingRight: "0px" }}>
         <div className="row flex-nowrap" style={{'--bs-gutter-x' : '0px'}}>
-    
-    
-        <Navbar />
+
         <div className="container analyzedatadiv" >
             <div className='px-md-3 pt-md-5 pt-5 d-flex flex-column flex-md-row justify-content-between'>
                 <h2 className='fw-bold' style={{color: '#243445'}}>Add Person</h2>

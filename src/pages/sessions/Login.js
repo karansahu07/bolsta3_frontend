@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import './InputFields.css';
-import Header from './Header'; // Make sure the path is correct based on your project structure
+import '../../InputFields.css';
+import Header from '../../Header'; // Make sure the path is correct based on your project structure
 import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const [otpSent, setOtpSent] = useState(false);

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import DataTable from "react-data-table-component";
-import { FaEdit, FaTrash, FaEye } from "react-icons/fa"; // Importing FontAwesome icons
-import Navbar from '../components/Navbar';
+import { FaEdit, FaTrash, FaEye, FaSearch } from "react-icons/fa";
 import './PersonDetail.css';
 import * as XLSX from "xlsx";
 
@@ -10,7 +9,6 @@ const PersonDetail = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
 
-  // Sample Data
   const data = [
     {
       id: 1,
@@ -38,12 +36,10 @@ const PersonDetail = () => {
     }
   ];
 
-  // Filter Function
   const filteredData = data.filter((item) =>
     item.name.toLowerCase().includes(filterText.toLowerCase())
   );
 
-  // Export to Excel
   const exportToExcel = () => {
     const ws = XLSX.utils.json_to_sheet(filteredData);
     const wb = XLSX.utils.book_new();
@@ -51,19 +47,16 @@ const PersonDetail = () => {
     XLSX.writeFile(wb, "PersonsData.xlsx");
   };
 
-  // Function to open the View Popup
   const handleViewClick = (row) => {
     setSelectedRow(row);
     setShowPopup(true);
   };
 
-  // Close Popup Function
   const handleClosePopup = () => {
     setShowPopup(false);
     setSelectedRow(null);
   };
 
-  // Table Columns
   const columns = [
     { name: "Name", selector: (row) => row.name, sortable: true },
     { name: "First Bolsta", selector: (row) => row.firstBolsta, sortable: true },
@@ -90,22 +83,25 @@ const PersonDetail = () => {
   ];
 
   return (
-    <div className="container-fluid" style={{ paddingLeft: "0px", paddingRight: "0px" }}>
-      <div className="row flex-nowrap" style={{ '--bs-gutter-x': '0px' }}>
-        <Navbar />
-        <div className="container analyzedatadiv mt-4">
+    <div className="container-fluid">
+        
+        <div className="mt-4">
           
-          {/* Search Bar */}
-          <input
-            type="text"
-            placeholder="Search name..."
-            className="search-input rounded-pill border-1 ps-4 p-2"
-            style={{ width: '80%' }}
-            value={filterText}
-            onChange={(e) => setFilterText(e.target.value)}
-          />
-
-          {/* Header and Export Button */}
+          <div className="search-container" style={{ position: 'relative', width: '92%', display: 'flex', alignItems: 'center' }}>
+            <FaSearch style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', color: '#888' }} />
+            <input
+              type="text"
+              placeholder="Search name..."
+              className="search-input rounded-pill border-1 ps-4 p-2"
+              style={{ width: '100%', paddingLeft: '2.5rem!important', paddingRight: '40px' }}
+              value={filterText}
+              onChange={(e) => setFilterText(e.target.value)}
+            />
+            <button className="search-btn" style={{ position: 'absolute', right: '-85px', background: '#243445', border: 'none', padding: '8px', borderRadius: '50%' }}>
+              <FaSearch style={{ color: 'white' }} />
+            </button>
+          </div>
+          
           <div className="custom-container d-flex justify-content-between mt-4 mb-3">
             <h2 style={{ color: "#243445" }}>All Person</h2>
             <button className="export-btn border-0 text-white" style={{ background: "#243445" }} onClick={exportToExcel}>
@@ -113,7 +109,6 @@ const PersonDetail = () => {
             </button>
           </div>
 
-          {/* Data Table */}
           <div className="custom-container2">
             <DataTable
               columns={columns}
@@ -123,14 +118,13 @@ const PersonDetail = () => {
             />
           </div>
 
-          {/* View Popup */}
           {showPopup && selectedRow && (
             <div className="popup-overlay">
               <div className="popup-box">
                 <h3>Person Details</h3>
                 <p><strong>Name:</strong> {selectedRow.name}</p>
-                <p><strong>First Bolsto:</strong> {selectedRow.firstBolsto}</p>
-                <p><strong>Latest Bolsto:</strong> {selectedRow.latestBolsto}</p>
+                <p><strong>First Bolsta:</strong> {selectedRow.firstBolsta}</p>
+                <p><strong>Latest Bolsta:</strong> {selectedRow.latestBolsta}</p>
                 <p><strong>Weak Words:</strong> {selectedRow.weakWords}</p>
                 <p><strong>Filter Words:</strong> {selectedRow.filterWords}</p>
                 <p><strong>Conscious Score:</strong> {selectedRow.consciousScore}</p>
@@ -139,7 +133,7 @@ const PersonDetail = () => {
             </div>
           )}
         </div>
-      </div>
+      
     </div>
   );
 };

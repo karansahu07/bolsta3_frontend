@@ -14,9 +14,9 @@ function AnalyzeData() {
                 user_id: 1234
             })
         })
-        .then(response => response.json())
-        .then(data => setData(data))
-        .catch(error => console.log('Error fetching data:', error));
+            .then(response => response.json())
+            .then(data => setData(data))
+            .catch(error => console.log('Error fetching data:', error));
     }, []);
 
     return (
@@ -31,13 +31,13 @@ function AnalyzeData() {
                         </Link>
                         <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu" style={{ width: "100%" }}>
                             <li className="nav-item mt-2 " >
-                                <Link to="https://ek-reps.com:8080/live_recording" className="nav-link align-middle px-0" style={{color: "black"}}>
+                                <Link to="https://ek-reps.com:8080/live_recording" className="nav-link align-middle px-0" style={{ color: "black" }}>
                                     <img className="img-fluid" src={process.env.PUBLIC_URL + "/Vector.png"} style={{ paddingLeft: 10 }} />
                                     <span className="ms-1 d-none d-sm-inline">Practice</span>
                                 </Link>
                             </li>
                             <li className="nav-item mt-2 active" >
-                                <Link to="/analyze-data" className="nav-link px-0 align-middle" style={{color: "black"}}>
+                                <Link to="/analyze-data" className="nav-link px-0 align-middle" style={{ color: "black" }}>
                                     <img className="img-fluid" src={process.env.PUBLIC_URL + "/Vector.png"} style={{ paddingLeft: 10 }} />
                                     <span className="ms-1 d-none d-sm-inline">My Video</span>
                                 </Link>
@@ -50,53 +50,53 @@ function AnalyzeData() {
                         </div>
                     </div>
                 </div>
-<div className="col py-3">
-    <div className="container">
-        <h1>Analyzed Data</h1>
-            <div className="row my-2">
-                <div className="col-md-2">
-                    <strong>User ID:</strong>
+                <div className="col py-3">
+                    <div className="container">
+                        <h1>Analyzed Data</h1>
+                        <div className="row my-2">
+                            <div className="col-md-2">
+                                <strong>User ID:</strong>
+                            </div>
+                            <div className="col-md-2">
+                                <strong>Filler Words:</strong>
+                            </div>
+                            <div className="col-md-2">
+                                <strong>Weak Words:</strong>
+                            </div>
+                            <div className="col-md-2">
+                                <strong>Conciseness Score:</strong>
+                            </div>
+                            <div className="col-md-2">
+                                <strong>Smiling Percentage:</strong>
+                            </div>
+                            <div className="col-md-2">
+                                <strong>Speech Speed:</strong>
+                            </div>
+                        </div>
+                        {data.map(item => (
+                            <div key={item.user_id} className="row my-2">
+                                <div className="col-md-2">
+                                    <li>{item.user_id}</li>
+                                </div>
+                                <div className="col-md-2">
+                                    <li>{item.filler_words}</li>
+                                </div>
+                                <div className="col-md-2">
+                                    <li>{item.weak_words}</li>
+                                </div>
+                                <div className="col-md-2">
+                                    <li>{item.conciseness_score}</li>
+                                </div>
+                                <div className="col-md-2">
+                                    <li>{item.smiling_percentage}</li>
+                                </div>
+                                <div className="col-md-2">
+                                    <li>{item.speed}</li>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-                <div className="col-md-2">
-                    <strong>Filler Words:</strong>
-                </div>
-                <div className="col-md-2">
-                    <strong>Weak Words:</strong>
-                </div>
-                <div className="col-md-2">
-                    <strong>Conciseness Score:</strong>
-                </div>
-                <div className="col-md-2">
-                    <strong>Smiling Percentage:</strong>
-                </div>
-                <div className="col-md-2">
-                    <strong>Speech Speed:</strong>
-                </div>
-            </div>		
-        {data.map(item => (
-            <div key={item.user_id} className="row my-2">
-                <div className="col-md-2">
-                    <li>{item.user_id}</li>
-                </div>
-                <div className="col-md-2">
-                    <li>{item.filler_words}</li>
-                </div>
-                <div className="col-md-2">
-                    <li>{item.weak_words}</li>
-                </div>
-                <div className="col-md-2">
-                    <li>{item.conciseness_score}</li>
-                </div>
-                <div className="col-md-2">
-                    <li>{item.smiling_percentage}</li>
-                </div>
-                <div className="col-md-2">
-                    <li>{item.speed}</li>
-                </div>
-            </div>
-        ))}
-    </div>
-</div>
             </div>
         </div>
     );

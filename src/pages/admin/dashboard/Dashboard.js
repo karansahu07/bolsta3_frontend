@@ -1,7 +1,6 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
-import PersonList from './components/PersonList'
-import './Admin.css'
+import PersonList from '../../../components/PersonList'
+import '../Admin.css'
 
 export default function Dashboard() {
   return (
@@ -9,8 +8,7 @@ export default function Dashboard() {
         <div className="container-fluid" style={{ paddingLeft: "0px", paddingRight: "0px" }}>
             <div className="row flex-nowrap" style={{'--bs-gutter-x' : '0px'}}>
         
-        
-                <Navbar />
+    
                 <div className="container dashboarddiv mx-md-3 d-flex flex-column gap-4" >
                     <div className=' pt-md-3 pt-5 d-block ' style={{borderBottom: '2px solid #ABABAB'}}>
                         <h2 className='fw-bold' style={{color: '#243445'}}>Dashboard</h2>

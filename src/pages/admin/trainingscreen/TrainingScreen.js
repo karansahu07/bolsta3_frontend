@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import Navbar from '../components/Navbar'
-import './Admin.css'
-import Traningvideocard from './components/Traningvideocard'
+import Navbar from '../../../components/Navbar'
+import '../Admin.css'
+import Traningvideocard from '../../../components/Traningvideocard'
 
 
-export default function Traningscreen() {
+export default function TrainingScreen() {
 
     const [videourl, setvideourl] = useState('');
     const [video , setvideo] = useState(false);
@@ -20,9 +20,7 @@ export default function Traningscreen() {
   return (
     <div className="container-fluid" style={{ paddingLeft: "0px", paddingRight: "0px" }}>
     <div className="row flex-nowrap" style={{'--bs-gutter-x' : '0px'}}>
-
-
-    <Navbar/>
+      
     <div className="container trainingscreendiv analyzedatadiv">
     <div className="row w-100 pt-3 ps-3">
     <Traningvideocard title={title} time={time} description={description} thumbnail={thumbnail} setvideourl={setvideourl} setvideo={setvideo}/>

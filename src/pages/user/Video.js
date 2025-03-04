@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect, Suspense } from 'react';
 import Webcam from 'react-webcam';
 import * as faceapi from 'face-api.js';
-import './index.css';
-import "./MobileMenu.css";
+import '../../index.css';
+import "../../MobileMenu.css";
 import { Link } from 'react-router-dom';
-import Talktosaleform from './components/Talktosaleform';
-import Loading from './components/Loading';
+import Talktosaleform from '../../components/Talktosaleform';
+import Loading from '../../components/Loading';
 
 
 const SmileDetectionComponent = () => {

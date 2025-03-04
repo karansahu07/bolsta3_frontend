@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import '../MobileMenu.css'; 
-import '../admin/Admin.css';
+import '../pages/admin/Admin.css';
 
 export default function Navbar() {
         const [isOpen, setIsOpen] = useState(false);
@@ -61,7 +61,7 @@ export default function Navbar() {
                         <img src='/icons/bolstaicon.svg' alt='icon-volsta' />
                         <p className='normal-font m-0 fs-5'>DASHBOARD</p>
                     </Link>
-                    <Link className='d-flex gap-3 align-items-center' to='/traningscreen'>
+                    <Link className='d-flex gap-3 align-items-center' to='/TrainingScreen'>
                         <img src='/icons/Trainings.svg' alt='icon-volsta' />
                         <p className='normal-font m-0 fs-5'>Trainings</p>
                     </Link>
