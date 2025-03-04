@@ -3,6 +3,7 @@ import DataTable from "react-data-table-component";
 import { FaEdit, FaTrash, FaEye, FaSearch } from "react-icons/fa";
 import './PersonDetail.css';
 import * as XLSX from "xlsx";
+import UsePagination from "../../../components/Pagination"
 
 const PersonDetail = () => {
   const [filterText, setFilterText] = useState("");
@@ -24,6 +25,18 @@ const PersonDetail = () => {
     },
     {
       id: 2,
+      name: "Amit Sharma",
+      firstBolsta: "45%",
+      latestBolsta: "78%",
+      weakWords: "20%",
+      filterWords: "35%",
+      consciousScore: "22%",
+      smiling: "20%",
+      videoLeft: "03",
+      minutesLeft: "35",
+    },
+    {
+      id: 3,
       name: "Amit Sharma",
       firstBolsta: "45%",
       latestBolsta: "78%",
@@ -92,7 +105,7 @@ const PersonDetail = () => {
             <input
               type="text"
               placeholder="Search name..."
-              className="search-input rounded-pill border-1 ps-4 p-2"
+              className="search-input rounded-pill border-1 ps-5 p-2"
               style={{ width: '100%', paddingLeft: '2.5rem!important', paddingRight: '40px' }}
               value={filterText}
               onChange={(e) => setFilterText(e.target.value)}
@@ -103,7 +116,7 @@ const PersonDetail = () => {
           </div>
           
           <div className="custom-container d-flex justify-content-between mt-4 mb-3">
-            <h2 style={{ color: "#243445" }}>All Person</h2>
+            <h3 style={{ color: "#243445" }}>All Person</h3>
             <button className="export-btn border-0 text-white" style={{ background: "#243445" }} onClick={exportToExcel}>
               EXPORT EXCEL
             </button>
@@ -113,9 +126,10 @@ const PersonDetail = () => {
             <DataTable
               columns={columns}
               data={filteredData}
-              pagination
+              pagination={false}
               highlightOnHover
             />
+            <UsePagination />
           </div>
 
           {showPopup && selectedRow && (
