@@ -81,7 +81,7 @@ const PersonDetail = () => {
     { name: "Video Left", selector: (row) => row.videoLeft, sortable: true },
     { name: "Minutes Left", selector: (row) => row.minutesLeft, sortable: true },
     {
-      name: "Actions",
+      name: "",
       cell: (row) => (
         <div className="icon-container">
           <FaEdit className="action-icon edit-icon" />
@@ -106,12 +106,12 @@ const PersonDetail = () => {
               type="text"
               placeholder="Search name..."
               className="search-input rounded-pill border-1 ps-5 p-2"
-              style={{ width: '100%', paddingLeft: '2.5rem!important', paddingRight: '40px' }}
+              style={{ width: '100%', paddingLeft: '2.5rem!important', paddingRight: '40px', marginTop:'3px' }}
               value={filterText}
               onChange={(e) => setFilterText(e.target.value)}
             />
             <button className="search-btn" style={{ position: 'absolute', right: '-85px', background: '#243445', border: 'none', padding: '8px', borderRadius: '50%' }}>
-              <FaSearch style={{ color: 'white' }} />
+              <FaSearch style={{ color: 'white', height: '0.9em', width: '1.3em' }} />
             </button>
           </div>
           
@@ -122,7 +122,7 @@ const PersonDetail = () => {
             </button>
           </div>
 
-          <div className="custom-container2">
+          <div className="custom-container2" style={{ height : "fit-content" }}>
             <DataTable
               columns={columns}
               data={filteredData}
