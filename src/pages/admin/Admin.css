@@ -39,3 +39,22 @@ a:hover {
   padding-top: 2rem;
   padding-left: 2rem;
 }
+
+@media (max-width: 480px){
+  .left-div {
+    position: absolute;
+}
+  .cus-heading{
+    margin-top: revert-layer;
+  }
+}
+
+@media screen and (min-device-width: 481px) and (max-device-width: 768px) {
+  .left-div {
+    position: absolute;
+}
+  .cus-heading {
+      margin-top: 55px;
+  }
+}
+
