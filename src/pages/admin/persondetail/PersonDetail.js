@@ -98,7 +98,7 @@ const PersonDetail = () => {
   return (
     <div className="container-fluid">
         
-        <div className="mt-4">
+        <div className="mt-4 custom-right-div">
           
           <div className="search-container" style={{ position: 'relative', width: '92%', display: 'flex', alignItems: 'center' }}>
             <FaSearch style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', color: '#888' }} />

@@ -55,3 +55,9 @@
       margin-top: 65px;
   }
   }
+
+  @media (max-width: 768px) {
+    .custom-right-div {
+      margin-top: 95px !important;
+  }
+  }
