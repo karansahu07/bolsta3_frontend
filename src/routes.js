@@ -7,6 +7,7 @@ import PersonDetail from "./pages/admin/persondetail/PersonDetail";
 import TrainingScreen from "./pages/admin/trainingscreen/TrainingScreen";
 import Video from "./pages/user/Video"
 import UserDetails from "./pages/user/UserDetails";
+import SuperDashboard from "./pages/superadmin/dashboard/SuperDashboard";
 
 export const routes = [
     {
@@ -15,7 +16,7 @@ export const routes = [
         children : [
             {
                 path : "",
-                element : <PersonDetail />
+                element : <SuperDashboard />
             },
             {
                 path : "/dashboard",

@@ -90,7 +90,7 @@ export default function Dashboard() {
                             </div>
                         </div>
                         <div className='col-12 col-lg-6'>
-                            <div className='row gap-5'>
+                            <div className='row gap-5 justify-content-evenly perform'>
                                 <div className='col-lg-5 col-md-5 ms-2 d-flex gap-5'>
                                     <div style={{ border: '1px solid #A6A6A6', boxShadow: 'rgba(0, 0, 0, 0.5) -4px 8px 11px -4px', paddingInline: '2rem' }} className='rounded-4 py-4 '>
                                         <h4 className='fw-bold m-0' style={{ color: '#243445' }}>First Bolsta</h4>
@@ -112,31 +112,31 @@ export default function Dashboard() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='row mt-4 gap-5'>
-                                <div className='col-lg-5 ms-2 d-flex'>
+                            <div className='row mt-4 gap-4 performance-div'>
+                                <div className='col-lg-5 col-5 ms-2 d-flex'>
                                 <div style={{border: '1px solid #A6A6A6', boxShadow: 'rgba(0, 0, 0, 0.5) -4px 8px 11px -4px'}} className='rounded-4 py-4 px-4'>
-                                    <div className='mt-1'>
+                                    <div className='mt-1 performance'>
                                         <h6 className='normal-font m-0' style={{color: '#243445'}}>Weak Words</h6>
                                         <div className='d-flex gap-2 align-items-end'>
                                             <p className='normal-font m-0' style={{color: '#243445'}}>(24%)</p>
                                             <progress value='24' max='100' style={{height: '20px', width: '17.4em' , maxWidth: '100%'}}/>
                                         </div>
                                     </div>
-                                    <div className='mt-1'>
+                                    <div className='mt-1 performance'>
                                         <h6 className='normal-font m-0' style={{color: '#243445'}}>Filler Words</h6>
                                         <div className='d-flex gap-2 align-items-end'>
                                             <p className='normal-font m-0' style={{color: '#243445'}}>(24%)</p>
                                             <progress value='24' max='100' style={{height: '20px', width: '17.4em' , maxWidth: '100%'}}/>
                                         </div>
                                     </div>
-                                    <div className='mt-1'>
+                                    <div className='mt-1 performance'>
                                         <h6 className='normal-font m-0' style={{color: '#243445'}}>Conciseness Score</h6>
                                         <div className='d-flex gap-2 align-items-end'>
                                             <p className='normal-font m-0' style={{color: '#243445'}}>(24%)</p>
                                             <progress value='24' max='100' style={{height: '20px', width: '17.4em' , maxWidth: '100%'}}/>
                                         </div>
                                     </div>
-                                    <div className='mt-1'>
+                                    <div className='mt-1 performance' >
                                         <h6 className='normal-font m-0' style={{color: '#243445'}}>Smiling</h6>
                                         <div className='d-flex gap-2 align-items-end'>
                                             <p className='normal-font m-0' style={{color: '#243445'}}>(24%)</p>
@@ -145,30 +145,30 @@ export default function Dashboard() {
                                     </div>
                                 </div>
                                 </div>
-                                <div className='col-lg-5 ms-5 d-flex'>
+                                <div className='col-lg-5 col-5 ms-5 d-flex'>
                                 <div style={{border: '1px solid #A6A6A6', boxShadow: 'rgba(0, 0, 0, 0.5) -4px 8px 11px -4px'}} className='rounded-4 py-4 px-4'>
-                                    <div className='mt-1'>
+                                    <div className='mt-1 performance' >
                                         <h6 className='normal-font m-0' style={{color: '#243445'}}>Weak Words</h6>
                                         <div className='d-flex gap-2 align-items-end'>
                                             <p className='normal-font m-0' style={{color: '#243445'}}>(24%)</p>
                                             <progress value='24' max='100' style={{height: '20px', width: '17.4em' , maxWidth: '100%'}}/>
                                         </div>
                                     </div>
-                                    <div className='mt-1'>
+                                    <div className='mt-1 performance' >
                                         <h6 className='normal-font m-0' style={{color: '#243445'}}>Filler Words</h6>
                                         <div className='d-flex gap-2 align-items-end'>
                                             <p className='normal-font m-0' style={{color: '#243445'}}>(24%)</p>
                                             <progress value='24' max='100' style={{height: '20px', width: '17.4em' , maxWidth: '100%'}}/>
                                         </div>
                                     </div>
-                                    <div className='mt-1'>
+                                    <div className='mt-1 performance' >
                                         <h6 className='normal-font m-0' style={{color: '#243445'}}>Conciseness Score</h6>
                                         <div className='d-flex gap-2 align-items-end'>
                                             <p className='normal-font m-0' style={{color: '#243445'}}>(24%)</p>
                                             <progress value='24' max='100' style={{height: '20px', width: '17.4em' , maxWidth: '100%'}}/>
                                         </div>
                                     </div>
-                                    <div className='mt-1'>
+                                    <div className='mt-1 performance'>
                                         <h6 className='normal-font m-0' style={{color: '#243445'}}>Smiling</h6>
                                         <div className='d-flex gap-2 align-items-end'>
                                             <p className='normal-font m-0' style={{color: '#243445'}}>(24%)</p>
