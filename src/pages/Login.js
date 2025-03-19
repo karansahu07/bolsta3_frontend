@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../Header';
+import { useAuth } from '../context/AuthContext';
 
 
 const Login = () => {
@@ -9,19 +10,11 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
+  const {login} = useAuth();
+
     const handleLogin = async (e) => {
         e.preventDefault();
-        try {
-            const res = await axios.post('http://localhost:5000/api/login', { email, password });
-            localStorage.setItem('token', res.data.token);
-            localStorage.setItem('role', res.data.role);
-
-            if (res.data.role === 'superadmin') navigate('/SuperDashbard');
-            else if (res.data.role === 'admin') navigate('/dashboard');
-            else navigate('/student-dashboard');
-        } catch (err) {
-            alert(err.response?.data?.error || 'Login failed');
-        }
+        login({email, password})
     };
 
     return (

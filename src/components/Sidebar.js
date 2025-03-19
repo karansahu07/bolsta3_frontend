@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { navigations } from '../navigations';
+import { useAuth } from '../context/AuthContext';
 const iconmap = {
     bolsta: "/icons/bolstaicon.svg",
     addaccount: "/icons/Addaccount.svg",
@@ -15,8 +16,12 @@ export default function Sidebar() {
         setIsOpen(!isOpen);
     };
 
+    const {user} = useAuth();
+
     const rendernavitem = (navigations) => {
-        return navigations.map((navitem, index) => {
+        const filterednav = navigations.filter((nav)=> nav.auth.includes(user.role))
+
+        return filterednav.map((navitem, index) => {
             return <Link className='d-flex gap-3 align-items-center' to={navitem.path}>
                 <img src={iconmap[navitem.icon]} alt='icon-volsta' />
                 <p className='normal-font m-0 fs-5'>{navitem.name}</p>

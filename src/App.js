@@ -1,11 +1,12 @@
 import './App.css';
 import { useRoutes , RouterProvider , createBrowserRouter, BrowserRouter} from 'react-router-dom';
 import { routes } from './routes';
+import { AuthProvider } from './context/AuthContext';
 
 
 const Router = () => {
   const content = useRoutes(routes);
-  return content;
+  return <AuthProvider>{content}</AuthProvider>;
 };
 
 const App = () => {

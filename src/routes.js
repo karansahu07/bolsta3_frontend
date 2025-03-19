@@ -7,47 +7,22 @@ import PersonDetail from "./pages/admin/persondetail/PersonDetail";
 import TrainingScreen from "./pages/admin/trainingscreen/TrainingScreen";
 import Video from "./pages/user/Video"
 import UserDetails from "./pages/user/UserDetails";
-import SuperDashboard from "./pages/SuperAdminDashboard";
-import Home from "./components/Home";
+import SuperDashboard from "./pages/superadmin/dashboard/SuperAdminDashboard";
+// import Home from "./components/Home";
+import AuthGuard from "./components/Authgaurd";
+// import { Home } from "lucide-react";
 
 export const routes = [
-    // {
-    //     path : "/",
-    //     element : <MainLayout></MainLayout>,
-    //     children : [
-    //         {
-    //             path : "",
-    //             element : <SuperDashboard />
-    //         },
-    //         {
-    //             path : "/dashboard",
-    //             element : <Dashboard />
-    //         },
-    //         {
-    //             path : "/trainings",
-    //             element : <TrainingScreen />
-    //         },
-    //         {
-    //             path : "/addperson",
-    //             element : <Addperson />
-    //         },
-    //         {
-    //             path : "/persons",
-    //             element : <PersonDetail />
-    //         },
-            
-    //     ]
-    // },
     {
         path : "/",
-        element : <MainLayout></MainLayout>,
+        element : <h1>Home page</h1>
+    },
+    {
+        path : "",
+        element : <AuthGuard><MainLayout></MainLayout></AuthGuard>,
         children : [
             {
-                path : "/",
-                element : <Home />
-            },
-            {
-                path : "/SuperDashbard",
+                path : "/superdashboard",
                 element : <SuperDashboard />
             },
             {
