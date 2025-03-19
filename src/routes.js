@@ -1,21 +1,53 @@
 import MainLayout from "./layouts/MainLayout";
-import Login from "./pages/sessions/Login";
+import Login from "./pages/Login";
 import AnalyzeData from "./New folder/AnalyzeData";
 import Addperson from "./pages/admin/addperson/Addperson";
-import Dashboard from "./pages/admin/dashboard/Dashboard";
+import Dashboard from "./pages/admin/dashboard/AdminDashboard";
 import PersonDetail from "./pages/admin/persondetail/PersonDetail";
 import TrainingScreen from "./pages/admin/trainingscreen/TrainingScreen";
 import Video from "./pages/user/Video"
 import UserDetails from "./pages/user/UserDetails";
-import SuperDashboard from "./pages/superadmin/dashboard/SuperDashboard";
+import SuperDashboard from "./pages/SuperAdminDashboard";
+import Home from "./components/Home";
 
 export const routes = [
+    // {
+    //     path : "/",
+    //     element : <MainLayout></MainLayout>,
+    //     children : [
+    //         {
+    //             path : "",
+    //             element : <SuperDashboard />
+    //         },
+    //         {
+    //             path : "/dashboard",
+    //             element : <Dashboard />
+    //         },
+    //         {
+    //             path : "/trainings",
+    //             element : <TrainingScreen />
+    //         },
+    //         {
+    //             path : "/addperson",
+    //             element : <Addperson />
+    //         },
+    //         {
+    //             path : "/persons",
+    //             element : <PersonDetail />
+    //         },
+            
+    //     ]
+    // },
     {
         path : "/",
         element : <MainLayout></MainLayout>,
         children : [
             {
-                path : "",
+                path : "/",
+                element : <Home />
+            },
+            {
+                path : "/SuperDashbard",
                 element : <SuperDashboard />
             },
             {
