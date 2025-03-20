@@ -5,7 +5,13 @@ export const navigations = [
         name : "Dashboard",
         icon : "bolsta",
         path : "/dashboard",
-        auth : [roles.ADMIN , roles.SUPER_ADMIN]
+        auth : [roles.ADMIN]
+    },
+    {
+        name : "Dashboard",
+        icon : "bolsta",
+        path : "/superdashboard",
+        auth : [roles.SUPER_ADMIN]
     },
     {
         name : "Trainings",
@@ -18,6 +24,12 @@ export const navigations = [
         icon : "addaccount",
         path : "/addaccount",
         auth : [roles.SUPER_ADMIN]
+    },
+    {
+        name : "Add Person",
+        icon : "person",
+        path : "/addperson",
+        auth : [roles.ADMIN]
     },
     {
         name : "Persons",

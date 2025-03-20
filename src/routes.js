@@ -8,14 +8,14 @@ import TrainingScreen from "./pages/admin/trainingscreen/TrainingScreen";
 import Video from "./pages/user/Video"
 import UserDetails from "./pages/user/UserDetails";
 import SuperDashboard from "./pages/superadmin/dashboard/SuperAdminDashboard";
-// import Home from "./components/Home";
+import Home from "./components/Home";
 import AuthGuard from "./components/Authgaurd";
 // import { Home } from "lucide-react";
 
 export const routes = [
     {
         path : "/",
-        element : <h1>Home page</h1>
+        element : <Home />
     },
     {
         path : "",
